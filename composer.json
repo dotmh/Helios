@@ -1,0 +1,7 @@
+{
+    "name" : "dotmh/helios",
+    "version" : "0.1.0",
+    "require": {
+        "codeception/codeception": "*"
+    }
+}
