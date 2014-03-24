@@ -1,6 +1,4 @@
 <?php
-require realpath(implode([__DIR__ , '..' , '..', 'Helios.php'] , DIRECTORY_SEPARATOR));
-
 use Codeception\Util\Stub;
 use Helios\Lib\Console;
 

@@ -28,7 +28,7 @@ final class Router {
     public $rawOptions = [];
 
     /**
-     * Parsees the arguments given to the script and pull out the required information
+     * Parses the arguments given to the script and pull out the required information
      * Sorting it in to the correct places
      */
     public function __construct() {

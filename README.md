@@ -8,7 +8,9 @@
 Introduction
 ============
 
-Helios is a framework for creating command line applications in PHP. It is heavily inspired by Ruby's
+Helios is a Titan from Greek Methodology , he represents the Sun. see [wikipedia:helios](http://en.wikipedia.org/wiki/Helios)
+
+However in this context Helios is a framework for creating command line applications in PHP. It is heavily inspired by Ruby's
 [Thor](http://whatisthor.com). Helios is not designed to be a task runner like make and rake etc, but rather a way of
 writing CLI applications , although it could always be a task runner very easily.
 
@@ -20,7 +22,8 @@ Helios is still very much a work in progress and this document is more a design 
 Task File
 =========
 Helios uses a task file to define the commands (tasks) that you wish to run with helios. A task file is simple a PHP
-file that defines a class that extends `\Helios\Task` base class, from now on this will be referred too as a task class.
+file that defines a class called `Task` that extends `\Helios\Task` base class, from now on this will be referred too
+as a task class.
 
 The task file can have one of the following names , and it will picked up automatically.
 
@@ -204,3 +207,27 @@ MORE
 
 @TODO write more of the readme including document helper methods for outputing
 etc.
+
+LICENSE
+=======
+The MIT License (MIT)
+
+Copyright (c) 2014 Martin Haynes AKA DotMH
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

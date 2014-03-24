@@ -1,7 +1,20 @@
 {
     "name" : "dotmh/helios",
     "version" : "0.1.0",
+    "description" : "A Library for building awesome CLI apps in PHP",
+    "authors" : [
+        {
+            "name"      : "Martin Haynes",
+            "email"     : "oss@dotmh.com",
+            "homepage"  : "http://www.dotmh.com",
+            "role"      : "Lead Developer"
+        }
+    ],
+    "license": "MIT",
     "require": {
         "codeception/codeception": "*"
+    },
+    "autoload" : {
+        "psr-4" : {"Helios\\": "."}
     }
 }

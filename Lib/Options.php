@@ -1,7 +1,6 @@
 <?php
 namespace Helios\Lib;
 
-
 /**
  * Class Options
  * Uses the command line options from the router and the options map from a task class to build an easy to use
@@ -15,6 +14,10 @@ namespace Helios\Lib;
 final class Options {
 
     const GLOBALKEY = "global";
+
+    const DEFAULT_VALUE = "default";
+    const ALIAS         = "alias";
+    const TYPE          = "type";
 
     public $valid = true;
 
@@ -39,7 +42,8 @@ final class Options {
 
         // Set all the values to there defaults
         foreach($this->useMap() as $key => $value) {
-            $values[$key] = $value[DEFAULT_VALUE];
+            $this->values[$key] = $value[self::DEFAULT_VALUE];
+
         }
 
         $this->parseOptions($options);
@@ -112,9 +116,9 @@ final class Options {
 
             // Now we run some checks against the option map
             // Type
-            if ( !is_null($value) && $this->mapKey($key, TYPE) != "boolean" && gettype($value) == $this->mapKey($key, TYPE) ) {
+            if ( !is_null($value) && $this->mapKey($key, self::TYPE) != "boolean" && gettype($value) == $this->mapKey($key, self::TYPE) ) {
                 $this->values[$key] = $value;
-            } elseif ($this->mapKey($key, TYPE) == "boolean") {
+            } elseif ($this->mapKey($key, self::TYPE) == "boolean") {
                 $this->values[$key] = $this->valueOf($key);
             } else {
                 $this->valid = false;
@@ -166,11 +170,11 @@ final class Options {
         $actual = null;
 
         foreach($this->useMap() as $key => $value ) {
-            if ( array_key_exists(ALIAS , $value)) {
-                if ( is_array($value[ALIAS]) && in_array($aliasKey , $value[ALIAS])) {
+            if ( array_key_exists(self::ALIAS , $value)) {
+                if ( is_array($value[self::ALIAS]) && in_array($aliasKey , $value[self::ALIAS])) {
                     $actual = $key;
                     break;
-                } elseif($value[ALIAS] == $aliasKey) {
+                } elseif($value[self::ALIAS] == $aliasKey) {
                     $actual = $key;
                     break;
                 }

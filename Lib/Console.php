@@ -41,7 +41,7 @@ final class Console {
      * The extra control string needed to wrap the colors
      * i.e. full string for red text would be \x1b[31;1m
      */
-    const CONTROL_PREFIX    = '\x1b[';  // The control prefix
+    const CONTROL_PREFIX    = "\033[";  // The control prefix
     const CONTROL_SUFFEX    = 'm';      // the control suffix
     const CANCEL_COLOR      = '0';      // The code in order to cancel the color
     const FORGROUND         = 3;        // The number to tell the console we want to target the text color
@@ -118,6 +118,9 @@ final class Console {
      *
      * @param string $question the question to which you want a yes/no answer
      * @param null|string $default the default answer Y or N
+     * @param null|string $in_color the color for the forground
+     * @param null|string $on_color the color for the background
+     *
      * @return null|Boolean true on yes , false on no
      */
     final public static function confirm($question , $default = null, $in_color = null , $on_color = null) {
@@ -141,7 +144,10 @@ final class Console {
     }
 
     /**
-     * Underlines the text with the correct number of charaters
+     * Underlines the text with the correct number of characters
+     *
+     * @package Helios\Lib\Console
+     * @author Martin Haynes <oss@dotmh.com>
      *
      * @param string $text the text you wish to underline
      * @param null|string $in_color the color for the forground
@@ -158,6 +164,27 @@ final class Console {
         self::say($text, $in_color , $on_color);
         self::say($underline , $in_color , $on_color);
 
+    }
+
+    /**
+     * Horizontal rule
+     *
+     * @package Helios\Lib\Console
+     * @author Martin Haynes <oss@dotmh.com>
+     *
+     * @param null|string $in_color the color for the forground
+     * @param null|string $on_color the color for the background
+     * @param string $with (=) the character to use for the rule
+     * @param int $length (80) number of characters to rule for
+     */
+    final public static function rule($in_color = null , $on_color = null, $with = "=" , $length = 80) {
+        $string = "";
+
+        for ( $_i = 0; $_i < $length; ++$_i) {
+            $string .= $with;
+        }
+
+        self::say($string , $in_color , $on_color);
     }
 
     /**
@@ -267,6 +294,10 @@ final class Console {
         echo self::CONTROL_PREFIX.self::CANCEL_COLOR.self::CONTROL_SUFFEX;
     }
 
+    final public static function clear() {
+        self::reset_color();
+    }
+
     /**
      * Gets a the color constant form a color string
      *
@@ -289,12 +320,20 @@ final class Console {
         }
     }
 
+    /**
+     * Creates dynamic functions to allow say_yellow_on_black for example
+     *
+     * @param $name
+     * @param $argumens
+     * @throws Exceptions\ConsoleException
+     */
     final public static function __callStatic($name , $argumens) {
         $parts = explode('_', $name);
+
         if ( method_exists(__CLASS__, $parts[0])) {
 
-            $forground = (isset($parts[2])) ? self::string_to_color($parts[2]) : null;
-            $background = (isset($parts[4])) ? self::string_to_color($parts[3]) : null;
+            $forground = (isset($parts[1])) ? self::string_to_color($parts[1]) : null;
+            $background = (isset($parts[3])) ? self::string_to_color($parts[3]) : null;
             $function = $parts[0];
 
             self::$function($argumens[0], $forground , $background);

@@ -5,19 +5,27 @@
  * Date: 21/03/2014
  * Time: 12:59
  */
-
 namespace Helios;
 
-require_once "Lib/Autoloader.php";
+if (!defined("ROOT") ) define("ROOT" , __DIR__);
 
-use \Helios\Lib\Loader;
+require_once realpath(implode([ROOT , "vendor" , "autoload.php"], DIRECTORY_SEPARATOR));
 
-final class Main {
-    private $loader;
-    final public function __construct() {
-        if ( !defined('BASE_PATH') ) define('BASE_PATH', __DIR__);
-        $this->loader = new Loader();
-    }
-}
+\date_default_timezone_set('Europe/London');
 
-$helios = new Main();
+use Helios\Lib\Composer;
+use Helios\Lib\Console;
+use Helios\Lib\Helpers;
+use Helios\Lib\Options;
+use Helios\Lib\Router;
+
+$composer = new Composer(Helpers::file_join(ROOT , "composer.json"));
+
+Console::say_yellow("HELIOS");
+Console::rule(Console::YELLOW);
+Console::say_darkyellow($composer->description);
+Console::say_darkyellow("by {$composer->authors()}");
+Console::say_darkyellow("Version {$composer->version}");
+Console::say_darkyellow("License {$composer->license}");
+Console::rule(Console::DARKYELLOW , null, "-");
+Console::clear();
