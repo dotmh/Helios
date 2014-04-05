@@ -22,4 +22,10 @@ abstract class Task {
     public function setOptions(array $options) {
         $this->options = new Options($this->optionsMap , $options , $this->router->command);
     }
+
+    public function welcome() {
+
+    }
+
+
 }
